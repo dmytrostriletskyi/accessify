@@ -128,7 +128,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl https://raw.githubusercontent.com/dmytrostriletskyi/accessify/basic-accessibility-levels/examples/access/private.py > private.py
+$ curl -L https://git.io/fhASP > private.py
 $ python3 private.py
 ```
 
@@ -176,7 +176,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl https://raw.githubusercontent.com/dmytrostriletskyi/accessify/basic-accessibility-levels/examples/inheritance/private.py > inheritence_private.py
+$ curl -L https://git.io/fhASX > inheritence_private.py
 $ python3 inheritence_private.py
 ```
 
@@ -224,7 +224,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl https://raw.githubusercontent.com/dmytrostriletskyi/accessify/basic-accessibility-levels/examples/access/protected.py > protected.py
+$ curl -L https://git.io/fhASM > protected.py
 $ python3 protected.py
 ```
 
@@ -263,7 +263,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl https://raw.githubusercontent.com/dmytrostriletskyi/accessify/basic-accessibility-levels/examples/inheritance/protected.py > inheritence_protected.py
+$ curl -L https://git.io/fhASD > inheritence_protected.py
 $ python3 inheritence_protected.py
 ```
 
@@ -292,7 +292,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl https://raw.githubusercontent.com/dmytrostriletskyi/accessify/basic-accessibility-levels/examples/dir.py > dir.py
+$ curl -L https://git.io/fhASy > dir.py
 $ python3 dir.py
 ```
 
