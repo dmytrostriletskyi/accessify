@@ -2,7 +2,7 @@
 
 Python class members accessibility levels.
 
-[![Release](https://img.shields.io/github/release/dmytrostriletskyi/accessify.svg)](https://github.com/dmytrostriletskyi/pdbe/releases)
+[![Release](https://img.shields.io/github/release/dmytrostriletskyi/accessify.svg)](https://github.com/dmytrostriletskyi/accessify/releases)
 [![Build Status](https://travis-ci.com/dmytrostriletskyi/accessify.svg?branch=develop)](https://travis-ci.com/dmytrostriletskyi/accessify)
 [![codecov](https://codecov.io/gh/dmytrostriletskyi/design-kit/branch/develop/graph/badge.svg)](https://codecov.io/gh/dmytrostriletskyi/design-kit)
 
