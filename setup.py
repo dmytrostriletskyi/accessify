@@ -4,10 +4,15 @@ Setup the package.
 from setuptools import find_packages, setup
 
 
+with open('README.md', 'r') as read_me:
+    long_description = read_me.read()
+
 setup(
     version='0.1.0',
     name='accessify',
     description='Python class members accessibility levels.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/dmytrostriletskyi/accessify',
     license='MIT',
     author='Dmytro Striletskyi',
