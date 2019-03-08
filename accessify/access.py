@@ -9,9 +9,13 @@ from accessify.errors import (
     InaccessibleDueToItsProtectionLevelException,
 )
 
-ACCESS_WRAPPERS_NAMES = (
-    'private_wrapper',
-    'protected_wrapper',
+from accessify.utils import (
+    ACCESS_WRAPPERS_NAMES,
+    ClassMemberDefaultArguments,
+    ClassMemberMagicMethodNames,
+    ClassMemberTypes,
+    does_parents_contain_private_method,
+    find_decorated_method,
 )
 
 
@@ -27,7 +31,7 @@ def accessify(cls):
 
     for name, func in list(cls.__dict__.items()):
 
-        if hasattr(func, '__name__'):
+        if hasattr(func, ClassMemberMagicMethodNames.NAME):
 
             if func.__name__ in ACCESS_WRAPPERS_NAMES:
                 class_locals.remove(name)
@@ -38,38 +42,6 @@ def accessify(cls):
     cls.__dir__ = dir_magic_method_mock
 
     return cls
-
-
-def does_parents_contain_private_method(classes, method):
-    """
-    Check if at least one of parent classes contain method.
-
-    Rules:
-        - if classes first element is object, so obviously return false,
-        - if class parents contain the method (called by child) and this method has private access level, return true.
-    """
-    if classes[0].__name__ == 'object':
-        return False, None
-
-    for class_ in classes:
-        if hasattr(class_, method.__name__):
-            if getattr(class_, method.__name__).__name__ in ACCESS_WRAPPERS_NAMES:
-                return True, class_
-
-    return False, None
-
-
-def find_decorated_method(function):
-    """
-    Return the method going from the most top placed decorator under it.
-    """
-    if function.__class__.__name__ in ('staticmethod', 'classmethod'):
-        return find_decorated_method(function.__func__)
-
-    if function.__closure__ is not None:
-        return find_decorated_method(function.__closure__[0].cell_contents)
-
-    return function
 
 
 def private(func):
@@ -91,22 +63,22 @@ def private(func):
         if class_contain:
             raise InaccessibleDueToItsProtectionLevelException(
                 INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
-                    class_name=class_contain.__name__, method_name=method.__name__,
+                    class_name=class_contain.__name__, class_method_name=method.__name__,
                 )
             )
 
-        if inspect.currentframe().f_back.f_locals.get('self') is None:
+        if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
             raise InaccessibleDueToItsProtectionLevelException(
                 INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
-                    class_name=instance_class.__name__, method_name=method.__name__,
+                    class_name=instance_class.__name__, class_method_name=method.__name__,
                 )
             )
 
-        if func.__class__.__name__ == 'classmethod':
+        if func.__class__.__name__ == ClassMemberTypes.CLASS_METHOD:
             arguments = (instance_class, ) + tuple(arguments_without_instance)
             return func.__func__(*arguments, **kwargs)
 
-        elif func.__class__.__name__ == 'staticmethod':
+        elif func.__class__.__name__ == ClassMemberTypes.STATIC_METHOD:
             return func.__func__(*arguments_without_instance, **kwargs)
 
         else:
@@ -128,21 +100,21 @@ def protected(func):
 
         method = find_decorated_method(function=func)
 
-        if inspect.currentframe().f_back.f_locals.get('self') is None:
+        if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
             raise InaccessibleDueToItsProtectionLevelException(
                 INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
-                    class_name=instance_class.__name__, method_name=method.__name__,
+                    class_name=instance_class.__name__, class_method_name=method.__name__,
                 )
             )
 
         instance, *arguments_without_instance = args
         instance_class = instance.__class__
 
-        if func.__class__.__name__ == 'classmethod':
+        if func.__class__.__name__ == ClassMemberTypes.CLASS_METHOD:
             arguments = (instance_class, ) + tuple(arguments_without_instance)
             return func.__func__(*arguments, **kwargs)
 
-        elif func.__class__.__name__ == 'staticmethod':
+        elif func.__class__.__name__ == ClassMemberTypes.STATIC_METHOD:
             return func.__func__(*arguments_without_instance, **kwargs)
 
         else:

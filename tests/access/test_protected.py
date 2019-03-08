@@ -3,7 +3,7 @@ Provide tests for private accessibility level.
 """
 import pytest
 
-from accessify.main import (
+from accessify.access import (
     accessify,
     protected,
 )
