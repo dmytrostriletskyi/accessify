@@ -8,9 +8,9 @@ with open('README.md', 'r') as read_me:
     long_description = read_me.read()
 
 setup(
-    version='0.1.0',
+    version='0.2.0',
     name='accessify',
-    description='Python class members accessibility levels.',
+    description='Python design kit: interfaces, declared exception throws, class members accessibility levels.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/dmytrostriletskyi/accessify',
@@ -21,7 +21,6 @@ setup(
     classifiers=[
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
