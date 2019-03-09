@@ -384,7 +384,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl -L https://git.io/fhASM > single_method.py
+$ curl -L https://git.io/fhh2V > single_method.py
 $ python3 single_method.py
 ```
 
@@ -430,7 +430,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl -L https://git.io/fhASM > single_arguments.py
+$ curl -L https://git.io/fhh2w > single_arguments.py
 $ python3 single_arguments.py
 ```
 
@@ -478,7 +478,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl -L https://git.io/fhASM > single_access.py
+$ curl -L https://git.io/fhh2r > single_access.py
 $ python3 single_access.py
 ```
 
@@ -533,7 +533,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl -L https://git.io/fhASM > multiple.py
+$ curl -L https://git.io/fhh2o > multiple.py
 $ python3 multiple.py
 ```
 
@@ -591,7 +591,7 @@ Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
-$ curl -L https://git.io/fhASM > throws.py
+$ curl -L https://git.io/fhh26 > throws.py
 $ python3 throws.py
 ```
 
