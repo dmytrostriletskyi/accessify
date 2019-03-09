@@ -3,6 +3,9 @@ Setup the package.
 """
 from setuptools import find_packages, setup
 
+DESCRIPTION = 'Python design kit: ' \
+              'interfaces, declared exception throws, ' \
+              'class members accessibility levels (private and protected methods for humans).'
 
 with open('README.md', 'r') as read_me:
     long_description = read_me.read()
@@ -10,7 +13,7 @@ with open('README.md', 'r') as read_me:
 setup(
     version='0.2.0',
     name='accessify',
-    description='Python design kit: interfaces, declared exception throws, class members accessibility levels.',
+    description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/dmytrostriletskyi/accessify',
