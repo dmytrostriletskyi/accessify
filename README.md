@@ -619,7 +619,7 @@ Enter the container bash, check `Python` version and run tests:
 ```bash
 $ docker exec -it accessify bash
 $ root@36a8978cf100:/accessify# python --version
-$ root@36a8978cf100:/accessify# pytest -vv test
+$ root@36a8978cf100:/accessify# pytest -vv tests
 ```
 
 Clean container and images with the following command:
