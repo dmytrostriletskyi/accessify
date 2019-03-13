@@ -11,10 +11,10 @@ install:
   - pip install -r requirements-tests.txt
 
 script:
-  - safety check
-  - radon cc src -nb --total-average
-  - isort -rc src --diff
-  - flake8 src
+  - cat requirements-tests.txt requirements-dev.txt | safety check --stdin
+  - radon cc accessify -nb --total-average
+  - isort -rc accessify --diff
+  - flake8 accessify
   - coverage run -m pytest -vv tests
 
 after_success:
