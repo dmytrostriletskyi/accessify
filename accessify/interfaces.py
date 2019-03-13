@@ -5,19 +5,19 @@ import inspect
 
 from accessify.errors import (
     DECLARED_INTERFACE_EXCEPTION_HAS_NOT_BEEN_IMPLEMENTED_EXCEPTION_MESSAGE,
-    INTERFACE_MEMBER_HAS_NOT_BEEN_IMPLEMENTED_EXCEPTION_MESSAGE,
-    INTERFACE_MEMBER_HAS_BEEN_IMPLEMENTED_WITH_MISMATCHED_ARGUMENT_EXCEPTION_MESSAGE,
     IMPLEMENTED_INTERFACE_MEMBER_HAS_INCORRECT_ACCESS_MODIFIER_EXCEPTION,
+    INTERFACE_MEMBER_HAS_BEEN_IMPLEMENTED_WITH_MISMATCHED_ARGUMENT_EXCEPTION_MESSAGE,
+    INTERFACE_MEMBER_HAS_NOT_BEEN_IMPLEMENTED_EXCEPTION_MESSAGE,
     DeclaredInterfaceExceptionHasNotBeenImplementedException,
+    ImplementedInterfaceMemberHasIncorrectAccessModifierException,
     InterfaceMemberHasNotBeenImplementedException,
     InterfaceMemberHasNotBeenImplementedWithMismatchedArgumentsException,
-    ImplementedInterfaceMemberHasIncorrectAccessModifierException,
 )
 from accessify.utils import (
-    ClassMemberMagicMethodNames,
     MARK_MEMBER_RAISES_EXCEPTION,
-    get_class_members,
+    ClassMemberMagicMethodNames,
     find_decorated_method,
+    get_class_members,
 )
 
 
@@ -37,7 +37,7 @@ def throws(*exceptions):
 
 def implements(*interfaces):
     """
-    Implements detecting whether class that implements interface has been implemented all members of the interface.
+    Implement detecting whether class that implements interface has been implemented all members of the interface.
 
     Rules:
         - get class members, get interfaces members, compare it,
@@ -47,7 +47,7 @@ def implements(*interfaces):
     """
     def decorator(class_):
         """
-        Implements decorator.
+        Provide logic of implementing interface.
         """
         class_members = get_class_members(class_=class_)
 
@@ -64,7 +64,7 @@ def implements(*interfaces):
                             interface_name=interface.__name__,
                             interface_method_name=interface_method.name,
                             interface_method_arguments=interface_method.arguments_as_string,
-                        )
+                        ),
                     )
 
                 if interface_method.access_type != class_member.access_type:
@@ -75,7 +75,7 @@ def implements(*interfaces):
                             class_method_arguments=class_member.arguments_as_string,
                             interface_name=interface.__name__,
                             interface_method_name=interface_method.name,
-                        )
+                        ),
                     )
 
                 if class_member.arguments_as_string != interface_method.arguments_as_string:
@@ -85,7 +85,7 @@ def implements(*interfaces):
                             interface_name=interface.__name__,
                             interface_method_name=interface_method.name,
                             interface_method_arguments=interface_method.arguments_as_string,
-                        )
+                        ),
                     )
 
                 if hasattr(interface_method.method, ClassMemberMagicMethodNames.THROWS):
@@ -101,7 +101,7 @@ def implements(*interfaces):
                                     class_name=class_.__name__,
                                     class_method_name=interface_method.name,
                                     class_method_arguments=class_member.arguments_as_string,
-                                )
+                                ),
                             )
 
         return class_
