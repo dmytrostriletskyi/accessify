@@ -159,11 +159,11 @@ class ClassMember:
         Get function arguments.
         """
         if self.type == ClassMemberTypes.DELETER or self.type == ClassMemberTypes.GETTER:
-            return ClassMemberDefaultArguments.SELF,
+            return (ClassMemberDefaultArguments.SELF, )
 
         if self.type == ClassMemberTypes.SETTER:
             property_setter_argument_name = self.get_property_setter_argument_name(self.method.fset)
-            return ClassMemberDefaultArguments.SELF, property_setter_argument_name,
+            return (ClassMemberDefaultArguments.SELF, property_setter_argument_name)
 
         arguments = tuple(inspect.signature(function).parameters)
 

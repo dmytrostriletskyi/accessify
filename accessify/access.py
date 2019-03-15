@@ -8,7 +8,6 @@ from accessify.errors import (
     INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE,
     InaccessibleDueToItsProtectionLevelException,
 )
-
 from accessify.utils import (
     ACCESS_WRAPPERS_NAMES,
     ClassMemberDefaultArguments,
@@ -64,14 +63,14 @@ def private(func):
             raise InaccessibleDueToItsProtectionLevelException(
                 INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
                     class_name=class_contain.__name__, class_method_name=method.__name__,
-                )
+                ),
             )
 
         if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
             raise InaccessibleDueToItsProtectionLevelException(
                 INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
                     class_name=instance_class.__name__, class_method_name=method.__name__,
-                )
+                ),
             )
 
         if func.__class__.__name__ == ClassMemberTypes.CLASS_METHOD:
@@ -104,7 +103,7 @@ def protected(func):
             raise InaccessibleDueToItsProtectionLevelException(
                 INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
                     class_name=instance_class.__name__, class_method_name=method.__name__,
-                )
+                ),
             )
 
         instance, *arguments_without_instance = args
