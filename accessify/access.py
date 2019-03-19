@@ -3,14 +3,15 @@ Provide implementation of accessibility levels.
 """
 import copy
 import inspect
+import os
 
 from accessify.errors import (
     INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE,
     InaccessibleDueToItsProtectionLevelException,
 )
-
 from accessify.utils import (
     ACCESS_WRAPPERS_NAMES,
+    DISABLE_ACCESSIFY_ENV_VARIABLE_NAME,
     ClassMemberDefaultArguments,
     ClassMemberMagicMethodNames,
     ClassMemberTypes,
@@ -56,23 +57,27 @@ def private(func):
         instance_class = instance.__class__
         instance_class_parents = instance.__class__.__bases__
 
-        method = find_decorated_method(function=func)
+        if os.environ.get(DISABLE_ACCESSIFY_ENV_VARIABLE_NAME) is None:
+            method = find_decorated_method(function=func)
 
-        does_contain, class_contain = does_parents_contain_private_method(classes=instance_class_parents, method=method)
-
-        if class_contain:
-            raise InaccessibleDueToItsProtectionLevelException(
-                INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
-                    class_name=class_contain.__name__, class_method_name=method.__name__,
-                )
+            does_class_contain_private_method, class_that_contains_private_method = does_parents_contain_private_method(
+                classes=instance_class_parents,
+                method=method,
             )
 
-        if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
-            raise InaccessibleDueToItsProtectionLevelException(
-                INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
-                    class_name=instance_class.__name__, class_method_name=method.__name__,
+            if does_class_contain_private_method:
+                raise InaccessibleDueToItsProtectionLevelException(
+                    INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
+                        class_name=class_that_contains_private_method.__name__, class_method_name=method.__name__,
+                    ),
                 )
-            )
+
+            if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
+                raise InaccessibleDueToItsProtectionLevelException(
+                    INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
+                        class_name=instance_class.__name__, class_method_name=method.__name__,
+                    ),
+                )
 
         if func.__class__.__name__ == ClassMemberTypes.CLASS_METHOD:
             arguments = (instance_class, ) + tuple(arguments_without_instance)
@@ -98,14 +103,15 @@ def protected(func):
         instance, *arguments_without_instance = args
         instance_class = instance.__class__
 
-        method = find_decorated_method(function=func)
+        if os.environ.get(DISABLE_ACCESSIFY_ENV_VARIABLE_NAME) is None:
+            method = find_decorated_method(function=func)
 
-        if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
-            raise InaccessibleDueToItsProtectionLevelException(
-                INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
-                    class_name=instance_class.__name__, class_method_name=method.__name__,
+            if inspect.currentframe().f_back.f_locals.get(ClassMemberDefaultArguments.SELF) is None:
+                raise InaccessibleDueToItsProtectionLevelException(
+                    INACCESSIBLE_DUE_TO_ITS_PROTECTION_LEVEL_EXCEPTION_MESSAGE.format(
+                        class_name=instance_class.__name__, class_method_name=method.__name__,
+                    ),
                 )
-            )
 
         instance, *arguments_without_instance = args
         instance_class = instance.__class__

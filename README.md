@@ -1,13 +1,14 @@
 # accessify
 
 [![Release](https://img.shields.io/github/release/dmytrostriletskyi/accessify.svg)](https://github.com/dmytrostriletskyi/accessify/releases)
+[![PyPI version shields.io](https://img.shields.io/pypi/v/accessify.svg)](https://pypi.python.org/pypi/accessify/)
 [![Build Status](https://travis-ci.com/dmytrostriletskyi/accessify.svg?branch=develop)](https://travis-ci.com/dmytrostriletskyi/accessify)
 [![codecov](https://codecov.io/gh/dmytrostriletskyi/design-kit/branch/develop/graph/badge.svg)](https://codecov.io/gh/dmytrostriletskyi/design-kit)
 
-![Python3.4](https://img.shields.io/badge/Python-3.4-brightgreen.svg)
-![Python3.5](https://img.shields.io/badge/Python-3.5-brightgreen.svg)
-![Python3.6](https://img.shields.io/badge/Python-3.6-brightgreen.svg)
-![Python3.7](https://img.shields.io/badge/Python-3.7-brightgreen.svg)
+[![PyPI license](https://img.shields.io/pypi/l/accessify.svg)](https://pypi.python.org/pypi/accessify/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+
+[![Habrahabr](https://img.shields.io/badge/Post-Habrahabr-brightgreen.svg)](https://habr.com/ru/post/443192/)
 
   * [Getting started](#getting-started)
     * [What is accessify](#what-is-accessify)
@@ -25,6 +26,7 @@
       * [Single interface](#single-interface)
       * [Multiple interfaces](#multiple-interfaces)
       * [Exception throws declaration](#exception-throws-declaration)
+  * [Disable checking](#disable-checking)
   * [Contributing](#contributing)
   * [References](#references)
 
@@ -595,6 +597,15 @@ $ curl -L https://git.io/fhh26 > throws.py
 $ python3 throws.py
 ```
 
+## Disable checking
+
+You can disable all `accessify` checks. For instance, in the production, when you shouldn't check it because it already was checked 
+in the development. Use the following environment variable then:
+
+```bash
+export DISABLE_ACCESSIFY=True
+```
+
 ## Contributing
 
 Clone the project and install requirements:
@@ -619,7 +630,7 @@ Enter the container bash, check `Python` version and run tests:
 ```bash
 $ docker exec -it accessify bash
 $ root@36a8978cf100:/accessify# python --version
-$ root@36a8978cf100:/accessify# pytest -vv test
+$ root@36a8978cf100:/accessify# pytest -vv tests
 ```
 
 Clean container and images with the following command:
