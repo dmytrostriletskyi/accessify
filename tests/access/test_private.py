@@ -77,7 +77,7 @@ class CarWithPrivateCustomDecoratorEngine:
     CarWithPrivateClassMethodEngine,
     CarWithPrivateCustomDecoratorEngine,
 ])
-def test_private(class_):
+def test_private(class_, enable_accessify):
     """
     Case: access to the private member of the class.
     Expect: protected member not in dir(), raise access to private method exception.
