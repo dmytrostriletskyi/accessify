@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/dmytrostriletskyi/design-kit/branch/develop/graph/badge.svg)](https://codecov.io/gh/dmytrostriletskyi/design-kit)
 
 [![PyPI license](https://img.shields.io/pypi/l/accessify.svg)](https://pypi.python.org/pypi/accessify/)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/accessify.svg)](https://pypi.python.org/pypi/accessify/)
 
 [![Habrahabr](https://img.shields.io/badge/Post-Habrahabr-brightgreen.svg)](https://habr.com/ru/post/443192/)
 
