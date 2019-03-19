@@ -3,6 +3,7 @@ Provide utils.
 """
 import inspect
 
+DISABLE_ACCESSIFY_ENV_VARIABLE_NAME = 'DISABLE_ACCESSIFY'
 MARK_MEMBER_RAISES_EXCEPTION = 'raise {exception_name}'
 
 
