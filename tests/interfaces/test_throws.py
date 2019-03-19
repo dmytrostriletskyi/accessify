@@ -26,7 +26,7 @@ class HumanBasicsInterface:
         pass
 
 
-def test_throws():
+def test_throws(enable_accessify):
     """
     Case: set human does not exist and human already in love errors as required to be raised on the interface function.
     Expect: interface function has the tuple of the errors in magic method called `__throws__`.
@@ -35,7 +35,7 @@ def test_throws():
     assert human_basic_interface.love.__throws__ == (HumanDoesNotExistsError, HumanAlreadyInLoveError, )
 
 
-def test_throw_not_implemented():
+def test_throw_not_implemented(enable_accessify):
     """
     Case:
     Expect:

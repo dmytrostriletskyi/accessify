@@ -79,7 +79,7 @@ class CarWithPrivateCustomDecoratorsAndStaticMethodEngineToBeInherited:
     CarWithPrivateClassMethodEngineToBeInherited,
     CarWithPrivateCustomDecoratorsAndStaticMethodEngineToBeInherited,
 ])
-def test_private(class_):
+def test_private(class_, enable_accessify):
     """
     Case: access to the parent class private method while inheritance.
     Expect: access to the parent class private method while inheritance exception error message is raised.
