@@ -2,6 +2,7 @@
 Provide implementation of interfaces.
 """
 import inspect
+import os
 
 from accessify.errors import (
     DECLARED_INTERFACE_EXCEPTION_HAS_NOT_BEEN_IMPLEMENTED_EXCEPTION_MESSAGE,
@@ -14,6 +15,7 @@ from accessify.errors import (
     InterfaceMemberHasNotBeenImplementedWithMismatchedArgumentsException,
 )
 from accessify.utils import (
+    DISABLE_ACCESSIFY_ENV_VARIABLE_NAME,
     MARK_MEMBER_RAISES_EXCEPTION,
     ClassMemberMagicMethodNames,
     find_decorated_method,
@@ -49,6 +51,9 @@ def implements(*interfaces):
         """
         Provide logic of implementing interface.
         """
+        if os.environ.get(DISABLE_ACCESSIFY_ENV_VARIABLE_NAME) is not None:
+            return class_
+
         class_members = get_class_members(class_=class_)
 
         for interface in interfaces:

@@ -53,7 +53,7 @@ class UserInterface:
         pass
 
 
-def test_get_class_members():
+def test_get_class_members(enable_accessify):
     """
     Case: get members of the class.
     Expect: name, arguments and type as strings, function as object are returned composed to dicts.
