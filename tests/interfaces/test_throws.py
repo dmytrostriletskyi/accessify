@@ -2,16 +2,14 @@
 Provide tests for setting errors that could be raised in the particular function implementation.
 """
 import pytest
-
+from accessify.errors import DeclaredInterfaceExceptionHasNotBeenImplementedException
 from accessify.interfaces import (
     implements,
     throws,
 )
 
-from accessify.errors import DeclaredInterfaceExceptionHasNotBeenImplementedException
 
-
-class HumanDoesNotExistsError(Exception):
+class HumanDoesNotExistError(Exception):
     pass
 
 
@@ -21,7 +19,7 @@ class HumanAlreadyInLoveError(Exception):
 
 class HumanBasicsInterface:
 
-    @throws(HumanDoesNotExistsError, HumanAlreadyInLoveError)
+    @throws(HumanDoesNotExistError, HumanAlreadyInLoveError)
     def love(self, who, *args, **kwargs):
         pass
 
@@ -32,7 +30,7 @@ def test_throws(enable_accessify):
     Expect: interface function has the tuple of the errors in magic method called `__throws__`.
     """
     human_basic_interface = HumanBasicsInterface()
-    assert human_basic_interface.love.__throws__ == (HumanDoesNotExistsError, HumanAlreadyInLoveError, )
+    assert human_basic_interface.love.__throws__ == (HumanDoesNotExistError, HumanAlreadyInLoveError, )
 
 
 def test_throw_not_implemented(enable_accessify):
@@ -47,7 +45,7 @@ def test_throw_not_implemented(enable_accessify):
 
             def love(self, who, *args, **kwargs):
                 if who is None:
-                    raise HumanDoesNotExistsError
+                    raise HumanDoesNotExistError
 
     assert 'Declared exception HumanAlreadyInLoveError by HumanBasicsInterface.love() member has not ' \
            'been implemented by HumanWithoutImplementedException.love(self, who, args, kwargs)' == error.value.message

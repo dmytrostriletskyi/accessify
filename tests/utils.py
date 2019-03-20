@@ -1,6 +1,8 @@
 """
 Provide utils for testing the library.
 """
+ENGINE_HAS_BEEN_STARTED_RESPONSE = \
+    'Engine has been started! Details: type is `{type_}`, model is `{model}`, company is `{company}`.'
 
 
 def custom_decorator(func):
