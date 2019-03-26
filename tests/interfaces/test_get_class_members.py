@@ -1,16 +1,14 @@
 """
-Provide tests for detection class members.
+Provide tests for getting class members.
 """
 from accessify.access import (
     private,
     protected,
 )
-from accessify.interfaces import (
-    get_class_members,
-)
+from accessify.interfaces import get_class_members
 from accessify.utils import (
-    ClassMemberTypes,
     ClassMember,
+    ClassMemberTypes,
 )
 from tests.utils import custom_decorator
 
@@ -56,45 +54,53 @@ class UserInterface:
 def test_get_class_members(enable_accessify):
     """
     Case: get members of the class.
-    Expect: name, arguments and type as strings, function as object are returned composed to dicts.
+    Expect: class member as class that contains name, arguments, arguments as strings, object reference, etc.
     """
     expected_result = {}
 
     members = [
         ClassMember(
             class_=UserInterface,
-            method_info=('love', UserInterface.love),
+            name='love',
+            object_=UserInterface.love,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('name', UserInterface.name),
+            name='name',
+            object_=UserInterface.name,
             type_=ClassMemberTypes.GETTER,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('name', UserInterface.name),
+            name='name',
+            object_=UserInterface.name,
             type_=ClassMemberTypes.SETTER,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('name', UserInterface.name),
+            name='name',
+            object_=UserInterface.name,
             type_=ClassMemberTypes.DELETER,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('eat', UserInterface.eat),
+            name='eat',
+            object_=UserInterface.eat,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('think', UserInterface.think),
+            name='think',
+            object_=UserInterface.think,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('dream', UserInterface.dream),
+            name='dream',
+            object_=UserInterface.dream,
         ),
         ClassMember(
             class_=UserInterface,
-            method_info=('die', UserInterface.die),
+            name='die',
+            object_=UserInterface.die,
         ),
     ]
 
@@ -108,3 +114,4 @@ def test_get_class_members(enable_accessify):
     for member_unique_name, member in result.items():
         expected_member = expected_result.get(member_unique_name)
         assert expected_member.__dict__ == member.__dict__
+        assert expected_member.arguments == member.arguments

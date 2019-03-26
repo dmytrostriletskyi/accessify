@@ -16,7 +16,7 @@ class CarInterface:
 
 def test_disabling_accessify(disable_accessify):
     """
-    Case: disable accessify checking accessibility levels and interfaces with disable accessify environment variable.
+    Case: disable accessify checking accessibility levels and interfaces with disabling accessify environment variable.
     Expect: accessify does not check accessibility levels and implementing interfaces.
     """
     @implements(CarInterface)
