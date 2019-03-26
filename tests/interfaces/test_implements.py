@@ -2,14 +2,13 @@
 Provide tests for implements interface implementation.
 """
 import pytest
-
 from accessify.access import (
     private,
     protected,
 )
 from accessify.errors import (
-    InterfaceMemberHasNotBeenImplementedException,
     ImplementedInterfaceMemberHasIncorrectAccessModifierException,
+    InterfaceMemberHasNotBeenImplementedException,
 )
 from accessify.interfaces import implements
 from tests.utils import custom_decorator
@@ -104,7 +103,7 @@ def test_implements():
 
 def test_not_implements_private_access():
     """
-    Case: do not match member private access.
+    Case: do not implement interface member with mismatched private access.
     Expect: class mismatches interface member access modifier error message.
     """
     class HumanSoulInterface:
@@ -131,7 +130,7 @@ def test_not_implements_private_access():
 
 def test_not_implements_protected_access():
     """
-    Case: do not match member protected access.
+    Case: do not implement interface member with mismatched protected access.
     Expect: class mismatches interface member access modifier error message.
     """
     class HumanSoulInterface:
@@ -158,7 +157,7 @@ def test_not_implements_protected_access():
 
 def test_implements_no_implementation_getter():
     """
-    Case: do not implement getter.
+    Case: do not implement interface member that is getter.
     Expect: class does not implement interface member error message.
     """
     class HumanNameInterface:
@@ -179,7 +178,7 @@ def test_implements_no_implementation_getter():
 
 def test_implements_no_implementation_setter():
     """
-    Case: do not implement setter.
+    Case: do not implement interface member that is setter.
     Expect: class does not implement interface member error message.
     """
     class HumanNameInterface:
@@ -207,7 +206,7 @@ def test_implements_no_implementation_setter():
 
 def test_implements_no_implementation_deleter():
     """
-    Case: do not implement deleter.
+    Case: do not implement interface member that is deleter.
     Expect: class does not implement interface member error message.
     """
     class HumanNameInterface:
@@ -235,7 +234,7 @@ def test_implements_no_implementation_deleter():
 
 def test_implements_no_implementation_static_method():
     """
-    Case: do not implement staticmethod.
+    Case: do not implement interface member that is static method.
     Expect: class does not implement interface member error message.
     """
     class HumanBasicsInterface:
@@ -256,7 +255,7 @@ def test_implements_no_implementation_static_method():
 
 def test_implements_no_implementation_instance_method():
     """
-    Case: do not implement instance method.
+    Case: do not implement interface member that is method.
     Expect: class does not implement interface member error message.
     """
     class HumanBasicsInterface:
@@ -272,3 +271,121 @@ def test_implements_no_implementation_instance_method():
 
     assert 'class HumanWithoutImplementation does not implement ' \
            'interface member HumanBasicsInterface.love(self, who, args, kwargs)' == error.value.message
+
+
+def test_implements_not_cls_convention():
+    """
+    Case: do not implement interface member, which do not follow naming convention, that is class method.
+    Expect: class does not implement interface member error message.
+    """
+    class HumanBasicsInterface:
+
+        @classmethod
+        def think(this, about, *args, **kwargs):
+            pass
+
+    with pytest.raises(InterfaceMemberHasNotBeenImplementedException) as error:
+
+        @implements(HumanBasicsInterface)
+        class HumanWithoutImplementation:
+            pass
+
+    assert 'class HumanWithoutImplementation does not implement ' \
+           'interface member HumanBasicsInterface.think(this, about, args, kwargs)' == error.value.message
+
+
+def test_implements_not_self_convention():
+    """
+    Case: do not implement interface member, which do not follow naming convention.
+    Expect: class does not implement interface member error message.
+    """
+    class HumanBasicsInterface:
+
+        def think(this, about, *args, **kwargs):
+            pass
+
+    with pytest.raises(InterfaceMemberHasNotBeenImplementedException) as error:
+
+        @implements(HumanBasicsInterface)
+        class HumanWithoutImplementation:
+            pass
+
+    assert 'class HumanWithoutImplementation does not implement ' \
+           'interface member HumanBasicsInterface.think(this, about, args, kwargs)' == error.value.message
+
+
+def test_implements_not_self_convention_in_getter():
+    """
+    Case: do not implement interface member, which do not follow naming convention, that is getter.
+    Expect: class does not implement interface member error message.
+    """
+    class HumanNameInterface:
+
+        @property
+        def name(this):
+            return
+
+    with pytest.raises(InterfaceMemberHasNotBeenImplementedException) as error:
+
+        @implements(HumanNameInterface)
+        class HumanWithoutImplementation:
+            pass
+
+    assert 'class HumanWithoutImplementation does not implement ' \
+           'interface member HumanNameInterface.name(this)' == error.value.message
+
+
+def test_implements_not_self_convention_in_deleter():
+    """
+    Case: do not implement interface member, which do not follow naming convention, that is deleter.
+    Expect: class does not implement interface member error message.
+    """
+    class HumanNameInterface:
+
+        @property
+        def name(this):
+            return
+
+        @name.deleter
+        def name(this):
+            return
+
+    with pytest.raises(InterfaceMemberHasNotBeenImplementedException) as error:
+
+        @implements(HumanNameInterface)
+        class HumanWithoutImplementation:
+
+            @property
+            def name(this):
+                return
+
+    assert 'class HumanWithoutImplementation does not implement ' \
+           'interface member HumanNameInterface.name(this)' == error.value.message
+
+
+def test_implements_not_self_convention_in_setter():
+    """
+    Case: do not implement interface member, which do not follow naming convention, that is setter.
+    Expect: class does not implement interface member error message.
+    """
+    class HumanNameInterface:
+
+        @property
+        def name(this):
+            return
+
+        @name.setter
+        def name(this, new_name):
+            return
+
+    with pytest.raises(InterfaceMemberHasNotBeenImplementedException) as error:
+
+        @implements(HumanNameInterface)
+        class HumanWithoutImplementation:
+
+            @property
+            def name(this):
+                return
+
+    assert 'class HumanWithoutImplementation does not implement ' \
+           'interface member HumanNameInterface.name(this, new_name)' == error.value.message
