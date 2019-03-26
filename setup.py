@@ -11,7 +11,7 @@ with open('README.md', 'r') as read_me:
     long_description = read_me.read()
 
 setup(
-    version='0.3.0',
+    version='0.3.1',
     name='accessify',
     description=DESCRIPTION,
     long_description=long_description,
