@@ -36,8 +36,8 @@
 ### What is accessify
 
 `accessify` is a `Python` design kit that provides:
-* interfaces, 
-* declared exceptions throws, 
+* interfaces,
+* declared exceptions throws,
 * class members accessibility levels.
 
 that could be combined with each other to make your code slim and this library usage more justified.
@@ -45,10 +45,10 @@ that could be combined with each other to make your code slim and this library u
 <h3 id="getting-started-access-modifiers">Access modifiers</h3>
 
 Access level modifiers determine whether other classes can use a particular field or invoke a particular method.
-Accessibility levels are presented from the box in the languages like `C++`, `C#` and `Java`. 
+Accessibility levels are presented from the box in the languages like `C++`, `C#` and `Java`.
 
 ```csharp
-class Car 
+class Car
 {
     private string StartEngine()
     {
@@ -62,7 +62,7 @@ But `Python` does not have this in the same way.
 <h4 id="getting-started-access-modifiers-motivation">Motivation</h4>
 
 * `We're all consenting adults here` that is the  part of the `Python philosophy` that relies on human factor instead of the interpreter.
-* There is a `Python convention` that is to use an underscore prefix for protected and private members, that is a bit ugly. 
+* There is a `Python convention` that is to use an underscore prefix for protected and private members, that is a bit ugly.
 Isn't it? For instance, for the following piece of code that provides class a private member.
 
 ```python
@@ -72,7 +72,7 @@ class Car:
         pass
 ```
 
-* Moreover, private and protected methods could be easily accessed outside the class. This is really a point to postpone the 
+* Moreover, private and protected methods could be easily accessed outside the class. This is really a point to postpone the
 correct design of the system to the backlog, increasing the technical debt.
 
  ```python
@@ -80,7 +80,7 @@ class Car:
 
     def _start_engine(self, *args, **kwargs):
         pass
-        
+
     def __start_engine(self, *args, **kwargs):
         pass
 
@@ -93,8 +93,8 @@ car._Car__start_engine()
 <h3 id="getting-started-interfaces">Interfaces</h3>
 
 An interface is a contract specifying a set of methods and properties which required to be available on any implementing class.
-If the class implements an interface, but does not realize its method, corresponding errors should be raised. Interfaces are presented from the box in 
-the languages like `C++`, `C#` and `Java`. 
+If the class implements an interface, but does not realize its method, corresponding errors should be raised. Interfaces are presented from the box in
+the languages like `C++`, `C#` and `Java`.
 
 ```csharp
 interface HumanInterface
@@ -137,7 +137,7 @@ $ pip3 install accessify
 * Private members are accessible only within the body of the class.
 
 In this example, the `Car` class contains a private member named `start_engine`. As a private member, they cannot be accessed
-except by member methods. The private member `start_engine` is accessed only by way of a public method called `run`. 
+except by member methods. The private member `start_engine` is accessed only by way of a public method called `run`.
 
 ```python
 from accessify import private
@@ -172,7 +172,7 @@ Traceback (most recent call last):
 accessify.errors.InaccessibleDueToItsProtectionLevelException: Car.start_engine() is inaccessible due to its protection level
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -220,7 +220,7 @@ Traceback (most recent call last):
 accessify.errors.InaccessibleDueToItsProtectionLevelException: Car.start_engine() is inaccessible due to its protection level
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -233,7 +233,7 @@ $ python3 inheritence_private.py
 * A protected member is accessible within its class and by derived class instances.
 
 In this example, the `Car` class contains a protected member named `start_engine`. As a protected member, they cannot be accessed
-except by member methods. The protected member `start_engine` is accessed only by way of a public method called `run`. 
+except by member methods. The protected member `start_engine` is accessed only by way of a public method called `run`.
 
 ```python
 from accessify import protected
@@ -268,7 +268,7 @@ Traceback (most recent call last):
 accessify.errors.InaccessibleDueToItsProtectionLevelException: Car.start_engine() is inaccessible due to its protection level
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -307,7 +307,7 @@ if __name__ == '__main__':
 
 The code will work without errors.
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -336,7 +336,7 @@ if __name__ == '__main__':
     assert 'start_engine' not in dir(car)
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -383,7 +383,7 @@ Traceback (most recent call last):
 accessify.errors.InterfaceMemberHasNotBeenImplementedException: class Human does not implement interface member HumanInterface.eat(food, args, allergy, kwargs)
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -391,8 +391,8 @@ $ curl -L https://git.io/fhh2V > single_method.py
 $ python3 single_method.py
 ```
 
-* When you declare that class implements an interface, a class should implement all methods that presented in the interface 
-including **number, order and naming of the accepting arguments**. 
+* When you declare that class implements an interface, a class should implement all methods that presented in the interface
+including **number, order and naming of the accepting arguments**.
 
 In this example, there is an interface called `HumanInterface` that contains two methods `love` and `eat`. Also, there is
 a class `Human` that implements the interface but **missed 3 of 4 arguments for method «eat»**, so the corresponding error should be raised.
@@ -429,7 +429,7 @@ Traceback (most recent call last):
 accessify.errors.InterfaceMemberHasNotBeenImplementedWithMismatchedArgumentsException: class Human implements interface member HumanInterface.eat(food, args, allergy, kwargs) with mismatched arguments
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -437,11 +437,11 @@ $ curl -L https://git.io/fhh2w > single_arguments.py
 $ python3 single_arguments.py
 ```
 
-* When you declare that class implements an interface, a class should implement all methods that presented in the interface 
+* When you declare that class implements an interface, a class should implement all methods that presented in the interface
 including number, order and naming of the accepting arguments and **access modifier type**.
 
 In this example, there is an interface called `HumanInterface` that contains two methods `love` and `eat`. Also, there is
-a class `Human` that implements the interface but **missed private access modifier type for method «eat»**, so the corresponding 
+a class `Human` that implements the interface but **missed private access modifier type for method «eat»**, so the corresponding
 error should be raised.
 
 ```python
@@ -477,7 +477,7 @@ Traceback (most recent call last):
 accessify.errors.ImplementedInterfaceMemberHasIncorrectAccessModifierException: Human.eat(food, args, allergy, kwargs) mismatches HumanInterface.eat() member access modifier.
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -491,8 +491,8 @@ $ python3 single_access.py
 * When you declare that class that implements a bunch of interfaces, a class should implement all method that presented in
 each interface including number, order and naming of the accepting arguments and access modifier type.
 
-In this example, there are an interface `HumanSoulInterface` that contains a method called `love` and interface `HumanBasicsInterface` that 
-contains a method called `eat`. Also, there is a class `Human` that implements method `love` from the first interface, but 
+In this example, there are an interface `HumanSoulInterface` that contains a method called `love` and interface `HumanBasicsInterface` that
+contains a method called `eat`. Also, there is a class `Human` that implements method `love` from the first interface, but
 **missed method «eat»** from the second one, so the corresponding error should be raised.
 
 ```python
@@ -532,7 +532,7 @@ Traceback (most recent call last):
 accessify.errors.InterfaceMemberHasNotBeenImplementedException: class Human does not implement interface member HumanBasicsInterface.eat(food, args, allergy, kwargs)
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -542,11 +542,11 @@ $ python3 multiple.py
 
 #### Exception throws declaration
 
-* When you declare that interface method throws a particular exception, a class method that implement interface should 
+* When you declare that interface method throws a particular exception, a class method that implement interface should
 contain code in the body that raise this exception.
 * You can declare that the interface method throws multiple exceptions.
 
-In this example, exception `HumanDoesNotExistsError` and exception `HumanAlreadyInLoveError` are declared to be raised by 
+In this example, exception `HumanDoesNotExistsError` and exception `HumanAlreadyInLoveError` are declared to be raised by
 the `Human` class method called `love` , but method **missed to raise the second exception**, so the corresponding error should be raised.
 
 ```python
@@ -590,7 +590,7 @@ Traceback (most recent call last):
 accessify.errors.DeclaredInterfaceExceptionHasNotBeenImplementedException: Declared exception HumanAlreadyInLoveError by HumanInterface.love() member has not been implemented by Human.love(self, who, args, kwargs)
 ```
 
-Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/basic-accessibility-levels/examples).
+Test it out using the [examples](https://github.com/dmytrostriletskyi/accessify/tree/master/examples).
 Get the example that contains the code above by `curl` and run it by `python3`.
 
 ```bash
@@ -600,7 +600,7 @@ $ python3 throws.py
 
 ## Disable checking
 
-You can disable all `accessify` checks. For instance, in the production, when you shouldn't check it because it already was checked 
+You can disable all `accessify` checks. For instance, in the production, when you shouldn't check it because it already was checked
 in the development. Use the following environment variable then:
 
 ```bash
@@ -641,7 +641,7 @@ $ docker rm $(docker ps -a -q) -f
 $ docker rmi $(docker images -q) -f
 ```
 
-When you will make changes, ensure your code pass [the checkers](https://github.com/dmytrostriletskyi/accessify/blob/basic-accessibility-levels/.travis.yml#L15) 
+When you will make changes, ensure your code pass [the checkers](https://github.com/dmytrostriletskyi/accessify/blob/master/.travis.yml)
 and is covered by tests using [pytest](https://docs.pytest.org/en/latest).
 
 If you are new for the contribution, please read:
